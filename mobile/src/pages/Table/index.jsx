@@ -5,40 +5,41 @@ import { RectButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
 export default () => {
-    const navigation = useNavigation();
-
-    function navigateTable() {
-       navigation.navigate('Table');
-    }
-
     return (
         <View style={styles.container}>
-            <View style={styles.top}>
-                <View style={styles.logo}>
-                    <Image style={styles.image}source={require('../../assets/icon.png')}/>
-                    <Text style={styles.title}>Collector</Text>
-                </View>
-            </View>          
-            <RectButton style={styles.button} onPress={navigateTable}>
-                <Text style={styles.buttonText}>Entrar</Text>
+            <View style={styles.logo}>
+                <Image style={styles.image}source={require('../../assets/icon.png')}/>
+                <Text style={styles.title}>Collector</Text>
+            </View>
+            <View style={styles.middleContent}>
+
+            </View>
+            <RectButton style={styles.button} onPress={() => {}}>
+                <Text style={styles.buttonText}>Cadastrar</Text>
             </RectButton>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    logo: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        marginTop: 15
+    },
+
     image: {
-        width: 120,
-        height: 120,
+        width: 60,
+        height: 60,
         marginRight: 15
     }, 
 
     title: {
         color: '#595858',
         fontWeight: "bold",
-        fontSize: 30,
+        fontSize: 15,
         maxWidth: 150,
-        marginTop: 50
+        marginTop: 25
     },
 
     container: {
@@ -47,13 +48,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
     },
-    
-    logo: {
-        flexDirection: 'row',
-        justifyContent: 'center'
-    },
 
-    top: {
+    middleContent: {
         flex: 1,
         justifyContent: 'center'
     },
