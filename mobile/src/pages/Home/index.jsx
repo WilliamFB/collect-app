@@ -18,7 +18,7 @@ export default () => {
                     <Image style={styles.image}source={require('../../assets/icon.png')}/>
                     <Text style={styles.title}>Collector</Text>
                 </View>
-            </View>          
+            </View>
             <RectButton style={styles.button} onPress={navigateTable}>
                 <Text style={styles.buttonText}>Entrar</Text>
             </RectButton>

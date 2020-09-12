@@ -1,9 +1,11 @@
 import React from 'react';
 
-import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
+
+import PointCard from '../../components/PointCard';
 
 export default () => {
     const navigation = useNavigation();
@@ -24,6 +26,24 @@ export default () => {
                 </View>
             </View>
             <View style={styles.middleContent}>
+
+            <View style={styles.cardsList}>
+                <FlatList
+                    data={[
+                    {key: 'Devin'},
+                    {key: 'Dan'},
+                    {key: 'Dominic'},
+                    {key: 'Jackson'},
+                    {key: 'James'},
+                    {key: 'Joel'},
+                    {key: 'John'},
+                    {key: 'Jillian'},
+                    {key: 'Jimmy'},
+                    {key: 'Julie'},
+                    ]}
+                    renderItem={({item}) => <PointCard name={item.key}/>}
+                />
+            </View>
 
             </View>
             <RectButton style={styles.button} onPress={() => {}}>
@@ -90,5 +110,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#FFF',
         fontSize: 20
+    },
+
+    cardsList: {
+        marginTop: 15,
+        borderWidth: 2,
+        borderColor: '#2e7d32',
+        backgroundColor: '#eaeaea'
     }
 });
