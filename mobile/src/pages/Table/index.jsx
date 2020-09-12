@@ -1,15 +1,27 @@
 import React from 'react';
 
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import { Feather } from '@expo/vector-icons';
 
 export default () => {
+    const navigation = useNavigation();
+
+    function navigateHome() {
+        navigation.navigate('Home');
+     }
+
     return (
         <View style={styles.container}>
-            <View style={styles.logo}>
-                <Image style={styles.image}source={require('../../assets/icon.png')}/>
-                <Text style={styles.title}>Collector</Text>
+            <View style={styles.top}>
+                <TouchableOpacity style={styles.arrow} onPress={navigateHome}>
+                    <Feather name="arrow-left" size={25} color="#2e7d32" />
+                </TouchableOpacity>
+                <View style={styles.logo}>
+                    <Image style={styles.image}source={require('../../assets/icon.png')}/>
+                    <Text style={styles.title}>Collector</Text>
+                </View>
             </View>
             <View style={styles.middleContent}>
 
@@ -22,10 +34,18 @@ export default () => {
 }
 
 const styles = StyleSheet.create({
+    top: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+
+    arrow: {
+        marginTop: 15
+    },
+
     logo: {
         flexDirection: 'row',
-        justifyContent: 'flex-start',
-        marginTop: 15
+        marginTop: 10
     },
 
     image: {
