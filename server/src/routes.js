@@ -6,6 +6,6 @@ const pointsController = new PointsController();
 
 routes.get('/pontos-coleta', pointsController.show);
 routes.post('/pontos-coleta', pointsController.create);
-routes.put('/pontos-coleta', pointsController.edit);
+routes.put('/pontos-coleta/:name', pointsController.edit);
 
 module.exports = routes;

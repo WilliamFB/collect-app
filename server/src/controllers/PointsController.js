@@ -6,20 +6,20 @@ class PointsController {
         const { name } = req.body;
 
         //Check if the point exists
-        let pointExists = await Point.findOne({name: name});
+        const pointExists = await Point.findOne({name: name});
 
-        if(pointExists) return res.status(400).json({message: "This point already exists."});
+        if(pointExists) return res.json({check: false, message: "This point already exists!"});
 
         //Check missing fields
         if (!req.body.name || !req.body.address || !req.body.latitude || !req.body.longitude)
-            return res.status(400).json({message: "Missing fields."});
+            return res.json({check: false, message: "Missing fields!"});
         
         //Saving the point
         await point.save((err) => {
             if(err) return console.error(err);
         });
 
-        return res.json({message: "Point created!"});
+        return res.json({check: true, message: "Point created!"});
     }
 
     async show(req, res) {
@@ -31,20 +31,21 @@ class PointsController {
     }
 
     async edit(req, res) {
-        const { name } = req.body;
+        const nameBeforeEdit = req.params.name;
+        
+        console.log(nameBeforeEdit)
 
         //Check if the point exists
-        let pointExists = await Point.findOne({name: name});
+        const pointExists = await Point.findOne({name: nameBeforeEdit});
 
-        if(!pointExists)
-            return res.status(400).json({message: "This point does not exist."});
-        
+        if(!pointExists) return res.json({check: false, message: "This point does not exist!"});
+
         //Check missing fields
         if (!req.body.name || !req.body.address || !req.body.latitude || !req.body.longitude)
-            return res.status(400).json({message: "Missing fields."});
+            return res.json({check: false, message: "Missing fields!"});
 
         //Editing the point
-        await Point.findOne({name: name}, (err, point) => {
+        await Point.findOne({name: nameBeforeEdit}, (err, point) => {
             if(err) return console.error(err);
             
             point.name = req.body.name;
@@ -54,7 +55,7 @@ class PointsController {
 
             point.save();
             
-            return res.json({message: "Point edited!"});
+            return res.json({check: true, message: "Point edited!"});
         })
     }
 }
