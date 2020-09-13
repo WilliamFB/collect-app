@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import Logo from '../../components/Logo';
 import MainButton from '../../components/MainButton';
+import TopMenu from '../../components/TopMenu';
+
+import api from '../../services/api';
 
 export default () => {
     const navigation = useNavigation();
 
     function navigateToTable() {
-       navigation.navigate('Table');
+        navigation.navigate('Table');
     }
 
     return (
         <View style={styles.container}>
-            <View style={styles.top}>
-                <Logo />
+            <TopMenu pressFunction={navigateToTable} />
+            <View style={styles.middleContent}>
+                
             </View>
-            <MainButton text="->   Entrar" pressFunction={navigateToTable}/>
+            <MainButton text="Cadastrar" pressFunction={() => {}}/>
         </View>
     )
 }
@@ -31,7 +34,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 
-    top: {
+    middleContent: {
         flex: 1,
         justifyContent: 'center'
     }

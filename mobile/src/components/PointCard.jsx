@@ -4,7 +4,7 @@ import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default props => {
     return (
-        <TouchableOpacity style={styles.view}>
+        <TouchableOpacity onPress={props.onClick} style={styles.view}>
             <Text style={styles.text}>{props.name}</Text>
         </TouchableOpacity>
     )

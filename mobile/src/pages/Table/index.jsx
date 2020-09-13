@@ -1,44 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 import PointCard from '../../components/PointCard';
 import MainButton from '../../components/MainButton';
 import TopMenu from '../../components/TopMenu';
 
+import api from '../../services/api';
+
 export default () => {
+    const [points, setPoints] = useState([]);
     const navigation = useNavigation();
 
-    function navigateHome() {
+    useEffect(() => {
+        api.get('pontos-coleta').then(response => {
+            setPoints(response.data);
+        });
+    }, []);
+
+    function navigateToHome() {
         navigation.navigate('Home');
-     }
+    }
+
+    function navigateToRegister() {
+       navigation.navigate('Register');
+    }
+
+    function navigateToPoint(point) {
+        navigation.navigate('Point', point);
+    }
 
     return (
         <View style={styles.container}>
-            <TopMenu pressFunction={navigateHome} />
+            <TopMenu pressFunction={navigateToHome} />
             <View style={styles.middleContent}>
-
-            <View style={styles.cardsList}>
-                <FlatList
-                    data={[
-                    {key: 'Devin'},
-                    {key: 'Dan'},
-                    {key: 'Dominic'},
-                    {key: 'Jackson'},
-                    {key: 'James'},
-                    {key: 'Joel'},
-                    {key: 'John'},
-                    {key: 'Jillian'},
-                    {key: 'Jimmy'},
-                    {key: 'Julie'},
-                    ]}
-                    renderItem={({item}) => <PointCard name={item.key}/>}
-                />
+                <View style={styles.cardsList}>
+                    <ScrollView>
+                        {points.map(point => (
+                            <PointCard 
+                                onClick={() => navigateToPoint(point)}
+                                key={point.name}
+                                name={point.name}
+                                address={point.address}
+                            />
+                        ))}
+                    </ScrollView>
+                </View>
             </View>
-
-            </View>
-            <MainButton text="Cadastrar" pressFunction={() => {}}/>
+            <MainButton text="->   Criar Ponto" pressFunction={navigateToRegister}/>
         </View>
     )
 }
@@ -58,6 +69,7 @@ const styles = StyleSheet.create({
 
     cardsList: {
         marginTop: 15,
+        minHeight: 200,
         borderWidth: 2,
         borderColor: '#2e7d32',
         backgroundColor: '#eaeaea'
