@@ -8,6 +8,7 @@ import MainButton from '../../components/MainButton';
 import TopMenu from '../../components/TopMenu';
 
 import api from '../../services/api';
+import geocode from '../../services/geocode';
 
 export default () => {
     const navigation = useNavigation();
@@ -30,6 +31,25 @@ export default () => {
             } else {
                 return setWarningMessage(response.data.message);
             }
+        });
+    }
+    
+    function fillData() {
+        const key = "";
+
+        geocode.get(`address?key=${key}&location=${address}`).then(response => {
+            const infoSource = response.data.results[0].locations[0];
+
+            const country = String(infoSource.adminArea1);
+            const state = String(infoSource.adminArea3);
+            const city = String(infoSource.adminArea5);
+            const neighborhood = String(infoSource.adminArea6);
+            const street = String(infoSource.street);
+            const postalCode = String(infoSource.postalCode);
+            
+            setAddress(`${street} - ${neighborhood}, ${city} - ${state}, ${postalCode}, ${country}`);
+            setLatitude(String(infoSource.latLng.lat));
+            setLongitude(String(infoSource.latLng.lng));
         });
     }
 
@@ -77,7 +97,14 @@ export default () => {
                 </ScrollView>
                 <Text style={styles.warning}>{warningMessage}</Text>
             </View>
-            <MainButton text="Cadastrar" pressFunction={saveData}/>
+            <View style={styles.bottomButtons}>
+                <View style={{width: '50%', marginHorizontal: 2}}>
+                    <MainButton text="Preencher" pressFunction={fillData}/>
+                </View>
+                <View style={{width: '50%', marginHorizontal: 2}}>
+                    <MainButton text="Cadastrar" pressFunction={saveData}/>
+                </View>
+            </View>
         </View>
     )
 }
@@ -110,5 +137,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 17,
         marginTop: 8
+    },
+
+    bottomButtons: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        width: '100%'
     }
 });

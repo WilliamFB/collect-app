@@ -26,7 +26,7 @@ export default () => {
     }
 
     function navigateToRegister() {
-       navigation.navigate('Register');
+        navigation.navigate('Register');
     }
 
     function navigateToPoint(point) {
