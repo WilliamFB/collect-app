@@ -12,8 +12,9 @@ export default props => {
 
 const styles = StyleSheet.create({
     view: {
-        margin: 3,
-        height: 60,
+        marginHorizontal: 3,
+        marginVertical: 1.5,
+        height: 45,
         padding: 15,
         borderRadius: 7,
         backgroundColor: "#fff",

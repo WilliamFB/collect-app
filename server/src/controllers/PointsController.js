@@ -1,6 +1,31 @@
 const Point = require('../database/PointModel');
 
 class PointsController {
+    async show(req, res) {
+        await Point.find((err, points) => {
+            if(err) return console.error(err);
+            
+            return res.json(points);
+        });
+    }
+
+    async search(req, res) {
+        const filteredPoints = [];
+        const { text } = req.params;
+
+        await Point.find((err, points) => {
+            if(err) return console.error(err);
+
+            points.map(point => {
+                if(point.name.toLowerCase().search(text.toLowerCase()) != -1){
+                    filteredPoints.push(point);
+                }
+            })
+
+            return res.json(filteredPoints);
+        });
+    }
+
     async create(req, res) {
         const point = new Point(req.body);
         const { name } = req.body;
@@ -22,18 +47,8 @@ class PointsController {
         return res.json({check: true, message: "Point created!"});
     }
 
-    async show(req, res) {
-        await Point.find((err, points) => {
-            if(err) return console.error(err);
-
-            return res.json(points);
-        });
-    }
-
     async edit(req, res) {
         const nameBeforeEdit = req.params.name;
-        
-        console.log(nameBeforeEdit)
 
         //Check if the point exists
         const pointExists = await Point.findOne({name: nameBeforeEdit});
