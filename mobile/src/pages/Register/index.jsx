@@ -8,7 +8,7 @@ import MainButton from '../../components/MainButton';
 import TopMenu from '../../components/TopMenu';
 
 import api from '../../services/api';
-import geocode from '../../services/geocode';
+import { geocode, key } from '../../services/geocode';
 
 export default () => {
     const navigation = useNavigation();
@@ -19,8 +19,6 @@ export default () => {
     const [longitude, setLongitude] = useState('');
 
     const [warningMessage, setWarningMessage] = useState('');
-
-    const key = "ZrBdK1NQjfWO6TxNsHu9c8gfMfSoXwOv";
 
     function navigateToTable() {
         navigation.navigate('Table');
