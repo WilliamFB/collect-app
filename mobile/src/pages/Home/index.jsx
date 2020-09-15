@@ -10,7 +10,7 @@ export default () => {
     const navigation = useNavigation();
 
     function navigateToTable() {
-       navigation.navigate('Table');
+        navigation.navigate('Table');
     }
 
     return (
@@ -20,7 +20,7 @@ export default () => {
             </View>
             <MainButton text="->   Entrar" pressFunction={navigateToTable}/>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 30,
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
 
     top: {

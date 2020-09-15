@@ -20,6 +20,8 @@ export default () => {
 
     const [warningMessage, setWarningMessage] = useState('');
 
+    const key = "ZrBdK1NQjfWO6TxNsHu9c8gfMfSoXwOv";
+
     function navigateToTable() {
         navigation.navigate('Table');
     }
@@ -35,8 +37,6 @@ export default () => {
     }
     
     function fillData() {
-        const key = "";
-
         geocode.get(`address?key=${key}&location=${address}`).then(response => {
             const infoSource = response.data.results[0].locations[0];
 
@@ -106,7 +106,7 @@ export default () => {
                 </View>
             </View>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({

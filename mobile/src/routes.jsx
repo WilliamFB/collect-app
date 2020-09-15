@@ -13,13 +13,25 @@ const AppStack = createStackNavigator();
 export default () => {
     return (
         <NavigationContainer>
-            <AppStack.Navigator headerMode="none" screenOptions={{cardStyle: {backgroundColor: '#d3dceb'}}}>
+            <AppStack.Navigator
+                headerMode="none"
+                screenOptions={{
+                    cardStyle: {backgroundColor: '#d3dceb'},
+                    transitionSpec: {open: config, close: config}
+                }}
+            >
                 <AppStack.Screen name="Home" component={Home} />
                 <AppStack.Screen name="Point" component={Point} />
                 <AppStack.Screen name="Table" component={Table} />
                 <AppStack.Screen name="Register" component={Register} />
             </AppStack.Navigator>
         </NavigationContainer>
-    )
+    );
 }
 
+const config = {
+    animation: 'spring',
+    config: {
+        timing: 1000
+    }
+}

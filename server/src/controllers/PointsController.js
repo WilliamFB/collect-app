@@ -20,7 +20,7 @@ class PointsController {
                 if(point.name.toLowerCase().search(text.toLowerCase()) != -1){
                     filteredPoints.push(point);
                 }
-            })
+            });
 
             return res.json(filteredPoints);
         });
@@ -49,11 +49,17 @@ class PointsController {
 
     async edit(req, res) {
         const nameBeforeEdit = req.params.name;
+        const newName = req.body.name;
 
         //Check if the point exists
         const pointExists = await Point.findOne({name: nameBeforeEdit});
 
         if(!pointExists) return res.json({check: false, message: "This point does not exist!"});
+
+        //Check if the new name already exists
+        const newNameExists = await Point.findOne({name: newName});
+
+        if(newNameExists && newName != nameBeforeEdit) return res.json({check: false, message: "This point already exists!"});
 
         //Check missing fields
         if (!req.body.name || !req.body.address || !req.body.latitude || !req.body.longitude)
@@ -71,7 +77,7 @@ class PointsController {
             point.save();
             
             return res.json({check: true, message: "Point edited!"});
-        })
+        });
     }
 }
 

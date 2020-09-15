@@ -14,7 +14,7 @@ export default props => {
                 <Text style={styles.title}>Collector</Text>
             </View>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({

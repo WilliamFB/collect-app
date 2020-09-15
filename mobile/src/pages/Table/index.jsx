@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { View, StyleSheet, TextInput } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import PointCard from '../../components/PointCard';
@@ -14,12 +14,13 @@ export default () => {
     const navigation = useNavigation();
     const [points, setPoints] = useState([]);
     const [searchName, setSearchName] = useState('');
-    
+    const isFocused = useIsFocused();
+
     useEffect(() => {
         api.get('pontos-coleta').then(response => {
             setPoints(response.data);
         });
-    }, []);
+    }, [isFocused]);
 
     function navigateToHome() {
         navigation.navigate('Home');
@@ -60,6 +61,7 @@ export default () => {
                                 onClick={() => navigateToPoint(point)}
                                 key={point.name}
                                 name={point.name}
+                                address={point.address}
                             />
                         ))}
                     </ScrollView>
@@ -67,7 +69,7 @@ export default () => {
             </View>
             <MainButton text="->   Criar Ponto" pressFunction={navigateToRegister}/>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 30,
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
 
     middleContent: {

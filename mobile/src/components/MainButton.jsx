@@ -8,7 +8,7 @@ export default props => {
         <RectButton style={styles.button} onPress={props.pressFunction}>
             <Text style={styles.buttonText}>{props.text}</Text>
         </RectButton>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
