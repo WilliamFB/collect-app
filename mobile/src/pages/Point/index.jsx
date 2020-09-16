@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         paddingHorizontal: 10,
-        backgroundColor: '#eaeaea'
+        backgroundColor: '#e3e3e3'
     },
 
     title: {

@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import Logo from '../../components/Logo';
 import MainButton from '../../components/MainButton';
 
 export default () => {
@@ -15,10 +14,10 @@ export default () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.top}>
-                <Logo />
+            <View style={styles.center}>
+                <Image style={styles.logo} source={require('../../assets/icon.png')}/>
             </View>
-            <MainButton text="->   Entrar" pressFunction={navigateToTable}/>
+            <MainButton text="Entrar" pressFunction={navigateToTable}/>
         </View>
     );
 }
@@ -31,8 +30,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
-    top: {
+    logo: {
+        resizeMode: "stretch",
+        height: 120,
+        width: 240
+    },
+
+    center: {
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });

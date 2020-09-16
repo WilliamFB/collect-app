@@ -67,7 +67,7 @@ export default () => {
                     </ScrollView>
                 </View>
             </View>
-            <MainButton text="->   Criar Ponto" pressFunction={navigateToRegister}/>
+            <MainButton text="Criar Ponto" pressFunction={navigateToRegister}/>
         </View>
     );
 }
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 4,
         borderColor: '#2e7d32',
-        backgroundColor: '#eaeaea'
+        overflow: 'hidden'
     },
 
     input: {
@@ -102,6 +102,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         paddingHorizontal: 10,
-        backgroundColor: '#eaeaea'
+        backgroundColor: '#e3e3e3'
     }
 });

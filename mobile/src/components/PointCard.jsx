@@ -12,14 +12,13 @@ export default props => {
 }
 
 const styles = StyleSheet.create({
-    view: {
-        marginHorizontal: 3,
-        marginVertical: 1.8,
+    view: {  
         padding: 10,
-        borderRadius: 7,
-        backgroundColor: "#fff",
+        borderBottomWidth: 1,
+        borderColor: '#2e7d32',
         alignItems: 'flex-start',
         justifyContent: 'center',
+        backgroundColor: '#e3e3e3'
     },
 
     name: {

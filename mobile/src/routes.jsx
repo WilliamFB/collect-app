@@ -16,7 +16,7 @@ export default () => {
             <AppStack.Navigator
                 headerMode="none"
                 screenOptions={{
-                    cardStyle: {backgroundColor: '#d3dceb'},
+                    cardStyle: {backgroundColor: '#ededed'},
                     transitionSpec: {open: config, close: config}
                 }}
             >
